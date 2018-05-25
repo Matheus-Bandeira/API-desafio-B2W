@@ -29,5 +29,10 @@ EndPoints da API :
   
 - Buscar um planeta por id (Localmente): (GET) http://localhost:8080/planetas/{id}
 - Busca um planeta po nome (Localmente): (GET) http://localhost:8080/planetas/{nome}/nome
+- Remover planeta(Localmente): (DELETE) http://localhost:8080/planetas/{id}
+
+
+Consumindo a API de terceiro: https://swapi.co/ 
+- Consumir a API pelo nome
 
 
