@@ -33,6 +33,6 @@ EndPoints da API :
 
 
 Consumindo a API de terceiro: https://swapi.co/ 
-- Consumir a API pelo nome
-
+- Consumir a API pelo nome : (Remotamente) http://localhost:8080/swapi/{nome}
+Obs: Consulta  pelo nome do planeta do site mencionado acima. Logo em seguida, compara o nome com os planetas que já existem no banco(Localmente). Se achar um nome igual, a variável quantidadeAparicoes é setada para número de quantidade de filmes encontrado na busca da API.
 
