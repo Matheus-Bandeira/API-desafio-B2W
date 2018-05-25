@@ -40,11 +40,8 @@ public class PlanetaController {
 
 	@PostMapping
 	public ResponseEntity<Planeta> savePlaneta(@Valid @RequestBody Planeta planeta, HttpServletResponse response) {
-		// return this.planetaRepository.save(planeta);
+		
 		Planeta planetaSalvo = planetaRepository.save(planeta);
-		
-		//publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
-		
 		return ResponseEntity.status(HttpStatus.CREATED).body(planetaSalvo);
 	}
 
