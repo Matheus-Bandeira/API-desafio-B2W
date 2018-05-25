@@ -1,31 +1,34 @@
-package com.desafio.b2w.model;
+package com.desafio.api.b2w.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="planeta")
+@Document(collection = "planeta")
 public class Planeta {
 
 	@Id
 	private String id;
-	
-	@Indexed(unique= true)
+
+	@Indexed(unique = true)
 	@NotBlank
 	private String nome;
 
 	@NotBlank
 	private String clima;
-	
+
 	@NotBlank
 	private String terreno;
 
-	public Planeta(String id, String nome, String clima, String terreno) {
+	private Integer quantidadeAparicoes;
+
+	public Planeta(String id, String nome, String clima, String terreno, Integer quantidadeAparicoes) {
 		this.id = id;
 		this.nome = nome;
 		this.clima = clima;
 		this.terreno = terreno;
+		this.quantidadeAparicoes = quantidadeAparicoes;
 	}
 
 	public Planeta() {
@@ -34,7 +37,8 @@ public class Planeta {
 
 	@Override
 	public String toString() {
-		return "Planeta [id=" + id + ", nome=" + nome + ", clima=" + clima + ", terreno=" + terreno + "]";
+		return "Planeta [id=" + id + ", nome=" + nome + ", clima=" + clima + ", terreno=" + terreno
+				+ ", quantidadeAparicoes=" + quantidadeAparicoes + "]";
 	}
 
 	public String getId() {
@@ -67,6 +71,14 @@ public class Planeta {
 
 	public void setTerreno(String terreno) {
 		this.terreno = terreno;
+	}
+
+	public Integer getQuantidadeAparicoes() {
+		return quantidadeAparicoes;
+	}
+
+	public void setQuantidadeAparicoes(Integer quantidadeAparicoes) {
+		this.quantidadeAparicoes = quantidadeAparicoes;
 	}
 
 	@Override
