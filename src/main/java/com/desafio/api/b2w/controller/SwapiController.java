@@ -25,8 +25,4 @@ public class SwapiController {
 	    return ResponseEntity.ok(planetaFacade.findPlanetByName(nomePlaneta));
     }
     
-//    @GetMapping("/{id}")
-//	public ResponseEntity<Object> buscarPorId(@PathVariable("id") String id){
-//	    return ResponseEntity.ok(planetaFacade.findPlanetById(id));
-//    }
 }

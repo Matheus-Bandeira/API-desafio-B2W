@@ -2,6 +2,7 @@ package com.desafio.api.b2w.facade;
 
 import com.desafio.api.b2w.model.Planeta;
 import com.desafio.api.b2w.repository.PlanetaRepository;
+import com.desafio.api.b2w.service.PlanetaService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -29,6 +30,9 @@ public class PlanetaFacade {
 	List<Planeta> planetasBanco = new ArrayList<>();
 	
 	@Autowired
+	PlanetaService planetaService;
+	
+	@Autowired
 	PlanetaRepository planetaRepository;
 
 	private static final String URL_API_SWAPI_FILM = "https://swapi.co/api/planets/";
@@ -49,6 +53,7 @@ public class PlanetaFacade {
 		for(Planeta planeta: planetasBanco) {
 			if(planeta.getNome().equals(name)) {
 				planeta.setQuantidadeAparicoes(qtsFilms(objectReturned));
+				planetaService.atualizar(planeta.getId(), planeta);
 			}
 			
 			System.out.println("Nome do planeta: " + planeta.getNome() + " Numero de aparições: " + planeta.getQuantidadeAparicoes());
