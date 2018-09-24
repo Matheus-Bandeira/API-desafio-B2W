@@ -18,9 +18,11 @@ spring.data.mongodb.port=27017
 spring.data.mongodb.database=b2w
 
 EndPoints da API :
-- Listar os planetas Salvos (Localmente) : (GET) http://localhost:8080/planetas 
+- Listar os planetas Salvos : (GET) http://localhost:8080/planetas 
 - Salvar um determinado planteta : (POST) http://localhost:8080/planetas
     Informando um JSON:
+    
+    
      {
         "nome": "Terra",
         "clima": "tropical",
