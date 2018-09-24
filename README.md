@@ -27,12 +27,11 @@ EndPoints da API :
         "terreno": "arido"
     }
   
-- Buscar um planeta por id (Localmente): (GET) http://localhost:8080/planetas/{id}
-- Busca um planeta po nome (Localmente): (GET) http://localhost:8080/planetas/{nome}/nome
-- Remover planeta(Localmente): (DELETE) http://localhost:8080/planetas/{id}
+- Buscar um planeta por id : (GET) http://localhost:8080/planetas/{id}
+- Busca um planeta po nome : (GET) http://localhost:8080/planetas/{nome}/nome
+- Remover planeta : (DELETE) http://localhost:8080/planetas/{id}
 
 
-Consumindo a API de terceiro: https://swapi.co/ 
-- Consumir a API pelo nome : (Remotamente) http://localhost:8080/swapi/{nome}
-Obs: Consulta  pelo nome do planeta do site mencionado acima. Logo em seguida, compara o nome com os planetas que já existem no banco(Localmente). Se achar um nome igual, a variável quantidadeAparicoes é setada para número de quantidade de filmes encontrado na busca da API.
+Consumindo a API de terceiro: https://swapi.co/ :
 
+Ao salvar planeta, ele se comunica com API do Star Wars, obtem a quantidade de aparições e finaliza o processo de salvar.

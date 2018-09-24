@@ -1,5 +1,7 @@
 package com.desafio.api.b2w.model;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -13,12 +15,15 @@ public class Planeta {
 
 	@Indexed(unique = true)
 	@NotBlank
+	@NotNull
 	private String nome;
 
 	@NotBlank
+	@NotNull
 	private String clima;
 
 	@NotBlank
+	@NotNull
 	private String terreno;
 
 	private Integer quantidadeAparicoes;

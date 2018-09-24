@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.api.b2w.model.Planeta;
 import com.desafio.api.b2w.repository.PlanetaRepository;
+import com.desafio.api.b2w.service.PlanetaService;
+import com.desafio.api.b2w.event.RecursoCriadoEvent;
 
 @RestController
 @RequestMapping("/planetas")
@@ -29,25 +31,34 @@ public class PlanetaController {
 
 	@Autowired
 	PlanetaRepository planetaRepository;
-	
+
+	@Autowired
+	PlanetaService planetaService;
+
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@GetMapping
 	public List<Planeta> listPlaneta() {
-		return this.planetaRepository.findAll();
+		return planetaService.listarTodos();
 	}
 
 	@PostMapping
 	public ResponseEntity<Planeta> savePlaneta(@Valid @RequestBody Planeta planeta, HttpServletResponse response) {
-		
-		Planeta planetaSalvo = planetaRepository.save(planeta);
-		return ResponseEntity.status(HttpStatus.CREATED).body(planetaSalvo);
+
+		Planeta planetaSalvo = planetaService.criarPlaneta(planeta);
+		if (planetaSalvo != null) {
+			publisher.publishEvent(new RecursoCriadoEvent(this, response, planeta.getId()));
+			return ResponseEntity.status(HttpStatus.CREATED).body(planetaSalvo);
+		} else {
+			return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
+		}
+
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Planeta> findById(@PathVariable String id) {
-		Planeta planeta = planetaRepository.findOne(id);
+		Planeta planeta = planetaService.buscarpeloId(id);
 		return planeta != null ? ResponseEntity.ok(planeta) : ResponseEntity.notFound().build();
 	}
 
@@ -58,7 +69,13 @@ public class PlanetaController {
 	}
 
 	@RequestMapping(value = "/{nome}/nome", method = RequestMethod.GET)
-	public List<Planeta> findByNome(@PathVariable String nome) {
-		return this.planetaRepository.findByNomeLikeIgnoreCase(nome);
+	public ResponseEntity<List<Planeta>> findByNome(@PathVariable String nome) {
+		List<Planeta> listaPlaneta = planetaService.listarPlanetaPorNome(nome);
+
+		if (listaPlaneta != null) {
+			return new ResponseEntity<>(listaPlaneta, HttpStatus.OK);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 }
